@@ -12,6 +12,8 @@ export default params => (callback) => {
         baseUrl,
         gzip: true,
         json: true,
+        method: 'POST',
+        uri: '/',
     });
 
     baseRequest(params, (error, response) => {

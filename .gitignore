@@ -7,7 +7,6 @@ sedy/node_modules/*
 sedy/build/*
 sedy/config/development.json
 sedy/config/production.json
-sedy/config/test.json
 
 # Sedy Installer
 installer/node_modules/

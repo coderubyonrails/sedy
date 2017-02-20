@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
-import githubApi from './github';
+import githubApi from './githubTransporter';
 
 describe('Github API', () => {
     const logger = {
@@ -21,7 +21,7 @@ describe('Github API', () => {
 
     describe('pull request', () => {
         it('should reply to a pull request review comment', function* () {
-            const result = yield githubApi(logger, github).replyToPullRequestReviewComment({
+            const result = yield githubApi(github, logger).replyToPullRequestReviewComment({
                 repoUser: 'User',
                 repoName: 'Repo',
                 message: 'message',
@@ -41,7 +41,7 @@ describe('Github API', () => {
 
     describe('commit', () => {
         it('should retrieve a commit from its sha', function* () {
-            const result = yield githubApi(logger, github).getCommitFromId({
+            const result = yield githubApi(github, logger).getCommitFromId({
                 repoUser: 'User',
                 repoName: 'Repo',
                 commitId: 42,
@@ -51,7 +51,7 @@ describe('Github API', () => {
         });
 
         it('should create a commit', function* () {
-            const result = yield githubApi(logger, github).createCommit({
+            const result = yield githubApi(github, logger).createCommit({
                 repoUser: 'User',
                 repoName: 'Repo',
                 commitMessage: 'message',
@@ -73,7 +73,7 @@ describe('Github API', () => {
 
     describe('tree', () => {
         it('should retrieve a tree recursively from its id', function* () {
-            const result = yield githubApi(logger, github).getTreeFromId({
+            const result = yield githubApi(github, logger).getTreeFromId({
                 repoUser: 'User',
                 repoName: 'Repo',
                 id: 42,
@@ -83,7 +83,7 @@ describe('Github API', () => {
         });
 
         it('should create a tree', function* () {
-            const result = yield githubApi(logger, github).createTreeFromBase({
+            const result = yield githubApi(github, logger).createTreeFromBase({
                 repoUser: 'User',
                 repoName: 'Repo',
                 tree: 'tree',
@@ -101,7 +101,7 @@ describe('Github API', () => {
 
     describe('blob', () => {
         it('should retrieve a blob from its id', function* () {
-            const result = yield githubApi(logger, github).getBlobFromId({
+            const result = yield githubApi(github, logger).getBlobFromId({
                 repoUser: 'User',
                 repoName: 'Repo',
                 id: 42,
@@ -113,7 +113,7 @@ describe('Github API', () => {
 
     describe('reference', () => {
         it('should force update a branch reference', function* () {
-            const result = yield githubApi(logger, github).updateReference({
+            const result = yield githubApi(github, logger).updateReference({
                 repoUser: 'User',
                 repoName: 'Repo',
                 reference: 'reference',
@@ -131,7 +131,7 @@ describe('Github API', () => {
         });
 
         it('should update a branch reference without force', function* () {
-            const result = yield githubApi(logger, github).updateReference({
+            const result = yield githubApi(github, logger).updateReference({
                 repoUser: 'User',
                 repoName: 'Repo',
                 reference: 'reference',
@@ -151,7 +151,7 @@ describe('Github API', () => {
 
     describe('repository', () => {
         it('should retrieve collaborators', function* () {
-            const result = yield githubApi(logger, github).getRepoCollaborators({
+            const result = yield githubApi(github, logger).getRepoCollaborators({
                 repoUser: 'User',
                 repoName: 'Repo',
             });

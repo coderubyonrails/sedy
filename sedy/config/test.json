@@ -1,0 +1,6 @@
+{
+    "git": {
+        "transporter": "github-mock",
+        "credentials": ""
+    }
+}

@@ -38,9 +38,11 @@ status:
 stop:
 	PM2_HOME=".pm2" ./node_modules/.bin/pm2 kill
 
-deploy:
-	cd sedy && NODE_ENV=production make deploy
+deploy-oauth:
 	cd oauth && NODE_ENV=production make deploy
+
+deploy-sedy:
+	cd sedy && NODE_ENV=production make deploy
 
 test:
 	cd sedy && make test-unit test-e2e

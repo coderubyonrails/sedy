@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* global config */
 import co from 'co';
-import github from 'octonode';
 
 import answererFactory from './answerer';
 import commiterFactory from './commiter';
@@ -13,7 +12,7 @@ import parseFactory from './parser';
 import safeguardFactory from './safeguard';
 
 const main = function* (event, context, logger, conf) {
-    const githubClient = githubClientFactory(logger, github.client(conf.bot.oauthToken));
+    const githubClient = githubClientFactory(conf.git, logger);
     const parse = parseFactory(githubClient, logger);
     const parsedContent = yield parse(event);
 
@@ -77,7 +76,7 @@ const main = function* (event, context, logger, conf) {
     return { success, fixes: traces };
 };
 
-export const handler = function (event, context, callback, conf = config) {
+export const handler = (event, context, callback, conf = config) => {
     const logger = loggerFactory(conf);
 
     return co(function* () {

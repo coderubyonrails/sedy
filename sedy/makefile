@@ -33,10 +33,11 @@ test-unit:
 			'./src/**/*.spec.js'
 
 test-e2e:
-	./node_modules/.bin/mocha \
+	NODE_ENV=test ./node_modules/.bin/mocha \
 		--compilers js:babel-core/register \
 		--require babel-polyfill \
 		--require co-mocha \
 		--recursive \
-			./e2e/*.spec.js \
-			'./e2e/**/*.spec.js'
+			./e2e/setup.js \
+			./e2e/spec/*.js \
+			'./e2e/spec/**/*.js'
